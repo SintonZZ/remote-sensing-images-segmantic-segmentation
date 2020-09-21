@@ -66,5 +66,6 @@ class unet(nn.Module):
         dec1 = self.dec1(torch.cat([enc1, dec2], dim=1))
         dec0 = self.dec0(dec1)
         final = self.final(dec0)
-        # CrossEntropyLoss的input为没有softmax过的nn.outout, target为未经过one-hot的label
+        # nn.CrossEntropyLoss中内置了softmax
+        # CrossEntropyLoss的input为没有softmax过的output, target为未经过one-hot的label
         return final
