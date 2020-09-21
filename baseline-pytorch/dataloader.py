@@ -57,7 +57,8 @@ class RSDataset(Dataset):
         for m in matches:
             label[label == m] = matches.index(m)
         '''
-        # 不使用CrossEntropyLoss时需要进行one-hot编码
+        # pytorch中使用CrossEntropyLoss时不需要进行one-hot编码
+        # nn.CrossEntropyLoss()函数内部会将数值型label转换为one-hot编码后的label
         seg_labels = np.zeros((256, 256, nClasses))
         for c in range(nClasses):
             seg_labels[:, :, c] = (label == c).astype(int)
